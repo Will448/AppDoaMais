@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:myapp/services/donation_service.dart';
 import 'package:myapp/services/qr_service.dart';
-import 'dart:typed_data';
-
-// --- Formatters Customizados ---
 
 class CpfInputFormatter extends TextInputFormatter {
   @override
@@ -113,7 +110,6 @@ class _CreateDonationState extends State<CreateDonation> {
   late final DonationService _donationService;
   final QrService _qrService = QrService();
 
-  // Controladores de campos
   final _nameController = TextEditingController();
   final _cpfController = TextEditingController();
   final _amountController = TextEditingController();
@@ -121,7 +117,6 @@ class _CreateDonationState extends State<CreateDonation> {
   final _cardValidityController = TextEditingController();
   final _cardCvvController = TextEditingController();
 
-  // Estado para seleção de pagamento e doação anônima
   String _paymentMethod = 'pix';
   String _cardType = 'credito';
   bool _isAnonymous = false;
@@ -431,7 +426,7 @@ class _CreateDonationState extends State<CreateDonation> {
             }
           });
         },
-        activeColor: Colors.deepPurple.shade500,
+        activeThumbColor: Colors.deepPurple.shade500,
         contentPadding: EdgeInsets.zero,
       ),
     );

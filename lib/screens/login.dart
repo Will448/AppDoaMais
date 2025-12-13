@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,11 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // Serviços de autenticação
   late final AuthService _authService;
   late final GoogleAuthService _googleAuthService;
 
-  // A instância do GoogleSignIn é necessária para o serviço
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   
   bool _isLoading = false;
@@ -44,13 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       });
       _authService = AuthService(baseUrl: '');
-      // O serviço do Google agora lida com sua própria inicialização
       _googleAuthService = GoogleAuthService(baseUrl: '', googleSignIn: _googleSignIn);
       return;
     }
     
     _authService = AuthService(baseUrl: baseUrl);
-    // O serviço do Google agora lida com sua própria inicialização
     _googleAuthService = GoogleAuthService(baseUrl: baseUrl, googleSignIn: _googleSignIn);
   }
 
@@ -61,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _errorMessage = null;
     });
 
-    // A chamada complexa agora é substituída por uma chamada de serviço simples
     final result = await _googleAuthService.signIn();
 
     if (mounted) {

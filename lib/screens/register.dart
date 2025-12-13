@@ -26,7 +26,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final baseUrl = dotenv.env['API_URL'];
     if (baseUrl == null || baseUrl.isEmpty) {
         developer.log("API_URL não configurada no .env", name: "RegisterScreen");
-        // Futuramente, pode-se exibir um erro persistente na UI
         _registrationService = RegistrationService(baseUrl: '');
     } else {
         _registrationService = RegistrationService(baseUrl: baseUrl);
@@ -34,7 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> _register() async {
-    // 1. Validação da UI permanece na tela
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         cpfController.text.isEmpty ||
@@ -61,7 +59,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     setState(() => _isLoading = true);
 
-    // 2. Lógica de negócio é delegada ao serviço
     final result = await _registrationService.register(
       name: nameController.text,
       email: emailController.text,
@@ -71,7 +68,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     if (!mounted) return;
 
-    // 3. UI reage ao resultado do serviço
     if (result['success']) {
       _showSnackBar(result['message'] ?? "✅ Usuário cadastrado!", Colors.green);
       await Future.delayed(const Duration(seconds: 2));

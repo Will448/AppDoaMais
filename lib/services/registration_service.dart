@@ -23,7 +23,7 @@ class RegistrationService {
         'name': name.trim(),
         'email': email.trim().toLowerCase(),
         'password': password.trim(),
-        'cpf': cpf.replaceAll(RegExp(r'[.-]'), ''), // Garante que o CPF está sem formatação
+        'cpf': cpf.replaceAll(RegExp(r'[.-]'), ''),
       };
 
       developer.log("📤 ENVIANDO PARA: $url", name: 'RegistrationService');

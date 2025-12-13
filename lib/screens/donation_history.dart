@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp/services/campaign_service.dart';
 import 'package:myapp/services/donation_service.dart';
 import 'dart:developer' as developer;
 
@@ -21,7 +20,6 @@ class DonationsHistory extends StatefulWidget {
 
 class _DonationsHistoryState extends State<DonationsHistory> {
   late final DonationService _donationService;
-  late final CampaignService _campaignService;
   List<Map<String, dynamic>> _donations = [];
   bool _isLoading = true;
   String? _errorMessage;

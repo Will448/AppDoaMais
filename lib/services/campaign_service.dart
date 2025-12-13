@@ -8,7 +8,6 @@ class CampaignService {
   final String? _apiUrl = dotenv.env['API_URL'];
   final String? _globalGivingApiKey = dotenv.env['GLOBALGIVING_API_KEY'];
 
-  // Método auxiliar para tratar erros
   void _handleApiError(http.Response response, String functionName) {
     developer.log(
       'Erro na API em $functionName: ${response.statusCode}', 
@@ -24,7 +23,7 @@ class CampaignService {
     required double goalAmount,
     required String userId,
   }) async {
-    if (_apiUrl == null || _apiUrl!.isEmpty) {
+    if (_apiUrl == null || _apiUrl.isEmpty) {
       throw Exception('URL da API não configurada');
     }
 
@@ -43,7 +42,6 @@ class CampaignService {
       return jsonDecode(response.body);
     } else {
       _handleApiError(response, 'createCampaign');
-      // O throw acima vai parar a execução, mas para garantir a análise estática:
       return {}; 
     }
   }
@@ -54,7 +52,7 @@ class CampaignService {
     required String description,
     required double goalAmount,
   }) async {
-    if (_apiUrl == null || _apiUrl!.isEmpty) {
+    if (_apiUrl == null || _apiUrl.isEmpty) {
       throw Exception('URL da API não configurada');
     }
     
@@ -75,7 +73,7 @@ class CampaignService {
   }
 
   Future<void> deleteCampaign(String campaignId) async {
-    if (_apiUrl == null || _apiUrl!.isEmpty) {
+    if (_apiUrl == null || _apiUrl.isEmpty) {
       throw Exception('URL da API não configurada');
     }
 
@@ -88,7 +86,7 @@ class CampaignService {
 
   Future<Map<String, List<Map<String, dynamic>>>> fetchLocalCampaigns(
       String currentUserId) async {
-    if (_apiUrl == null || _apiUrl!.isEmpty) {
+    if (_apiUrl == null || _apiUrl.isEmpty) {
       throw Exception('URL da API não configurada no arquivo .env');
     }
 
@@ -133,7 +131,7 @@ class CampaignService {
   }
 
   Future<List<Map<String, dynamic>>> fetchGlobalCampaigns() async {
-    if (_globalGivingApiKey == null || _globalGivingApiKey!.isEmpty) {
+    if (_globalGivingApiKey == null || _globalGivingApiKey.isEmpty) {
       throw Exception('GLOBALGIVING_API_KEY não encontrada no .env');
     }
 
@@ -176,7 +174,7 @@ class CampaignService {
         }).toList();
       } else {
          _handleApiError(response, 'fetchGlobalCampaigns');
-         return []; // Retorno para análise estática
+         return [];
       }
     } catch (e) {
       developer.log('Erro ao buscar campanhas globais: $e',
@@ -186,7 +184,7 @@ class CampaignService {
   }
 
   Future<Map<String, dynamic>> getCampaignById(String campaignId) async {
-    if (_apiUrl == null || _apiUrl!.isEmpty) {
+    if (_apiUrl == null || _apiUrl.isEmpty) {
       developer.log('URL da API não configurada', name: 'CampaignService');
       throw Exception('URL da API não configurada');
     }
