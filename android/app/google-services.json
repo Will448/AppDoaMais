@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "427673044402-3obrkvsam7km8vb6dltv1m1o0fn8ol97.apps.googleusercontent.com",
+          "client_id": "427673044402-d016igejfq9ivoopqkf1niklslgida4s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.doacoesapp",
-            "certificate_hash": "1b0d3b70f6c2c0198a26e445da8951841c57f7f2"
+            "certificate_hash": "5fc23a4140fd2eeb5f69e6f83b9065c61101a7c2"
           }
         },
         {
