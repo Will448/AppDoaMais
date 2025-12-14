@@ -1,0 +1,15 @@
+0000000000000000000000000000000000000000 a9fd64df1a44784f219297345623a7a17c2b897b elias.coder1 <elias.coder1@gmail.com> 1765499508 +0000	commit (initial): Versão 1.0
+a9fd64df1a44784f219297345623a7a17c2b897b 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765499912 +0000	commit: Versão 2.0
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765499930 +0000	checkout: moving from master to master
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765499995 +0000	checkout: moving from master to pdm
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765500016 +0000	checkout: moving from pdm to master
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765500160 +0000	checkout: moving from master to master
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765500248 +0000	checkout: moving from master to master
+299d68fb63c89aa72c024da10d6ed9334275eafc 299d68fb63c89aa72c024da10d6ed9334275eafc elias.coder1 <elias.coder1@gmail.com> 1765500264 +0000	checkout: moving from master to master
+299d68fb63c89aa72c024da10d6ed9334275eafc 296140c09e212bfcacd3a836d41722eef33159eb elias.coder1 <elias.coder1@gmail.com> 1765582274 +0000	commit: feat
+296140c09e212bfcacd3a836d41722eef33159eb 0000000000000000000000000000000000000000 elias.coder1 <elias.coder1@gmail.com> 1765582294 +0000	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 296140c09e212bfcacd3a836d41722eef33159eb elias.coder1 <elias.coder1@gmail.com> 1765582294 +0000	Branch: renamed refs/heads/master to refs/heads/main
+296140c09e212bfcacd3a836d41722eef33159eb 0000000000000000000000000000000000000000 elias.coder1 <elias.coder1@gmail.com> 1765582326 +0000	Branch: renamed refs/heads/main to refs/heads/main
+296140c09e212bfcacd3a836d41722eef33159eb 296140c09e212bfcacd3a836d41722eef33159eb elias.coder1 <elias.coder1@gmail.com> 1765582326 +0000	Branch: renamed refs/heads/main to refs/heads/main
+296140c09e212bfcacd3a836d41722eef33159eb 67d8b4ffad8ba3e120b8b9a5add9e0807a2d14f4 elias.coder1 <elias.coder1@gmail.com> 1765582376 +0000	commit: Remove .env from repository
+67d8b4ffad8ba3e120b8b9a5add9e0807a2d14f4 67d8b4ffad8ba3e120b8b9a5add9e0807a2d14f4 elias.coder1 <elias.coder1@gmail.com> 1765582457 +0000	checkout: moving from main to main

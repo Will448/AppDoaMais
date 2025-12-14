@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[branch "pdm"]
+	vscode-merge-base = origin/master
+[remote "origin"]
+	url = https://github.com/EliasNote/doacoes_front.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
