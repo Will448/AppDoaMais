@@ -8,7 +8,6 @@ class CampaignService {
   final String? _apiUrl = dotenv.env['API_URL'];
   final String? _globalGivingApiKey = dotenv.env['GLOBALGIVING_API_KEY'];
 
-  // Método auxiliar para tratar erros
   void _handleApiError(http.Response response, String functionName) {
     developer.log(
       'Erro na API em $functionName: ${response.statusCode}', 
@@ -43,7 +42,6 @@ class CampaignService {
       return jsonDecode(response.body);
     } else {
       _handleApiError(response, 'createCampaign');
-      // O throw acima vai parar a execução, mas para garantir a análise estática:
       return {}; 
     }
   }
@@ -176,7 +174,7 @@ class CampaignService {
         }).toList();
       } else {
          _handleApiError(response, 'fetchGlobalCampaigns');
-         return []; // Retorno para análise estática
+         return [];
       }
     } catch (e) {
       developer.log('Erro ao buscar campanhas globais: $e',

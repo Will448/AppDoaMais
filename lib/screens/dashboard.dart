@@ -21,11 +21,9 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  // --- Services ---
   late final CampaignService _campaignService;
   late final GroqService _groqService;
 
-  // --- State Variables ---
   List<Map<String, dynamic>> _minhasCampanhas = [];
   List<Map<String, dynamic>> _outrasCampanhas = [];
   List<Map<String, dynamic>> _campanhasGlobais = [];

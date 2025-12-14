@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-// Serviço responsável por gerenciar doações via API.
 class DonationService {
   final String apiUrl;
 
@@ -98,21 +96,25 @@ class DonationService {
 
     try {
       final response = await http.get(url);
-      final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
-
-      developer.log(
-        '📥 Resposta do histórico: ${response.statusCode}',
-        name: 'DonationService',
-      );
-
+      
       if (response.statusCode == 200) {
+        final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+        developer.log(
+          '📥 Resposta do histórico: ${response.statusCode}',
+          name: 'DonationService',
+        );
         return {
           'success': true,
-          'donations': responseBody, // A API deve retornar uma lista de doações
+          'donations': responseBody, 
         };
       } else {
+        final errorBody = jsonDecode(utf8.decode(response.bodyBytes));
+        developer.log(
+          '❌ Erro ao buscar histórico: ${response.statusCode} - ${response.body}',
+          name: 'DonationService',
+        );
         return _errorResponse(
-          responseBody['error'] ?? 'Falha ao buscar o histórico de doações.',
+          errorBody['error'] ?? 'Falha ao buscar o histórico de doações.',
           statusCode: response.statusCode,
         );
       }
@@ -163,6 +165,6 @@ class DonationService {
       return 'Método de pagamento inválido: $paymentMethod';
     }
 
-    return null; // Sem erros
+    return null;
   }
 }
