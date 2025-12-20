@@ -14,7 +14,7 @@ if (localPropertiesFile.exists()) {
 
 val keyProperties = Properties()
 // In the Android module, the file is at ../key.properties
-val keyPropertiesFile = rootProject.file("key.properties")
+val keyPropertiesFile = rootProject.file("android/key.properties")
 if (keyPropertiesFile.exists()) {
     keyProperties.load(keyPropertiesFile.inputStream())
 }
