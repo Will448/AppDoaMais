@@ -3,6 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/services/donation_service.dart';
 import 'dart:developer' as developer;
+import 'package:myapp/services/receipt_service.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html;
 
 class DonationsHistory extends StatefulWidget {
   final String userId;
@@ -42,11 +45,16 @@ class _DonationsHistoryState extends State<DonationsHistory> {
       _errorMessage = null;
     });
 
-    final result = await _donationService.getDonationHistory(userId: widget.userId);
+    final result = await _donationService.getDonationHistory(
+      userId: widget.userId,
+    );
 
     if (result['success']) {
       final List data = result['donations'] ?? [];
-      developer.log('✅ ${data.length} doações encontradas', name: 'DonationsHistory');
+      developer.log(
+        '✅ ${data.length} doações encontradas',
+        name: 'DonationsHistory',
+      );
 
       double total = 0.0;
       final donations = data.map((item) {
@@ -86,7 +94,8 @@ class _DonationsHistoryState extends State<DonationsHistory> {
       );
       if (mounted) {
         setState(() {
-          _errorMessage = result['message'] ?? 'Erro ao carregar histórico de doações';
+          _errorMessage =
+              result['message'] ?? 'Erro ao carregar histórico de doações';
           _isLoading = false;
         });
       }
@@ -124,6 +133,100 @@ class _DonationsHistoryState extends State<DonationsHistory> {
           'icon': Icons.payment,
           'color': Colors.grey.shade600,
         };
+    }
+  }
+
+  Future<void> _generateAndShareReceipt({
+    required String donorName,
+    required String cpf,
+    required double amount,
+    required String paymentMethod,
+    required DateTime date,
+  }) async {
+    try {
+      developer.log('Iniciando geração do recibo...', name: 'DonationsHistory');
+      
+      // Mostrar indicador de loading
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 16),
+                  Text('Gerando recibo...'),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final pdfData = await ReceiptService.generateReceipt(
+        donorName: donorName,
+        cpf: cpf,
+        amount: amount,
+        paymentMethod: paymentMethod,
+        date: date,
+        campaignName: 'Campanha Doa+',
+      );
+
+      developer.log('PDF gerado com sucesso!', name: 'DonationsHistory');
+
+      // Fechar dialog de loading
+      if (mounted) Navigator.of(context).pop();
+
+      // Para web, fazer download direto do PDF
+      if (kIsWeb) {
+        final blob = html.Blob([pdfData], 'application/pdf');
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        final anchor = html.AnchorElement(href: url)
+          ..target = '_blank'
+          ..download = 'recibo_doacao_${DateTime.now().millisecondsSinceEpoch}.pdf'
+          ..click();
+        html.Url.revokeObjectUrl(url);
+        
+        developer.log('PDF baixado com sucesso!', name: 'DonationsHistory');
+      }
+
+      // Mostrar mensagem de sucesso
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Recibo gerado com sucesso!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      developer.log('❌ Erro ao gerar recibo: $e', name: 'DonationsHistory');
+      
+      // Fechar dialog de loading se estiver aberto
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+      }
+
+      // Mostrar mensagem de erro
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao gerar recibo: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 4),
+            action: SnackBarAction(
+              label: 'OK',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+          ),
+        );
+      }
     }
   }
 
@@ -269,6 +372,21 @@ class _DonationsHistoryState extends State<DonationsHistory> {
                   style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                icon: const Icon(Icons.picture_as_pdf),
+                label: const Text('Emitir recibo'),
+                onPressed: () => _generateAndShareReceipt(
+                  donorName: donorName,
+                  cpf: cpf,
+                  amount: amount,
+                  paymentMethod: paymentMethod,
+                  date: createdAt,
+                ),
+              ),
             ),
           ],
         ),
