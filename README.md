@@ -8,7 +8,7 @@
 O Doa+ é um aplicativo mobile desenvolvido com o objetivo de facilitar e incentivar doações, permitindo que usuários realizem contribuições de forma prática, segura e transparente. A plataforma possibilita a criação e gerenciamento de campanhas, integração com campanhas globais e geração de QR Codes para doações rápidas.
 O projeto utiliza uma arquitetura moderna, integra serviços externos e implementa CRUD completo, além de autenticação segura, incluindo login com Google.
 
-🎯 Funcionalidades Principais
+🎯 Funcionalidades Principais                                                        
 👤 Autenticação de usuários
 
 
